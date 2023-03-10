@@ -2,7 +2,9 @@ name: Check PR
 
 on:
   pull_request:
-    branches: [ $default-branch ]
+    branches:
+      - devel
+      - main
 
 jobs:
   build:
