@@ -25,6 +25,7 @@
         </element>
         <element name="HtmlViewId" type="string" minOccurs="0"/>
         <element name="Metadata" type="oaf:MetadataType" minOccurs="0"/>
+        <element name="AddApiVersionToHeader" type="boolean" minOccurs="0" default="false" />
       </sequence>
       <attribute name="configVersion" use="required">
         <simpleType>

@@ -73,6 +73,8 @@ public class DeegreeWorkspaceInitializer {
 
     private static HtmlViewConfiguration globalHtmlViewConfiguration;
 
+    private boolean addApiVersionToHeader = false;
+    
     public void initialize() {
         DeegreeWorkspace workspace = OGCFrontController.getServiceWorkspace();
         initConfiguration( workspace.getNewWorkspace() );
@@ -90,8 +92,12 @@ public class DeegreeWorkspaceInitializer {
     public OafDatasets getOafDatasets() {
         return oafConfiguration;
     }
+    
+    public boolean isAddApiVersionToHeader() {
+		return addApiVersionToHeader;
+	}
 
-    /**
+	/**
      * @param datasetId
      *                 the id of the dataset
      * @return the {@link HtmlViewConfiguration}  of the dataset with the passed id, <code>null</code> if not available
@@ -175,13 +181,14 @@ public class DeegreeWorkspaceInitializer {
             String id = resourceResourceIdentifier.getId();
             OafResource resource = (OafResource) newWorkspace.getResource( OgcApiProvider.class, id );
             OafDatasetConfiguration oafDatasetConfiguration = resource.getOafConfiguration();
+            addApiVersionToHeader = resource.isAddApiVersionToHeader();
             oafConfiguration.addDataset( id, oafDatasetConfiguration );
             HtmlViewConfiguration htmlViewConfiguration = resource.getHtmlViewConfiguration();
             if ( htmlViewConfiguration != null )
                 htmlViewConfigurations.put( id, htmlViewConfiguration );
         } );
     }
-
+    
     private void clearConfigs() {
         oafConfiguration = new OafDatasets();
         htmlViewConfigurations.clear();

@@ -34,5 +34,5 @@
     <MetadataURL format="application/xml">http://metaver?service=CSW&amp;request=GetRecordById&amp;version=2.0.2&amp;id=89362</MetadataURL>
     <MetadataURL format="text/html">http://localhost:8080/linkZuHTml/89362</MetadataURL>
   </Metadata>
-
+  <AddApiVersionToHeader>true</AddApiVersionToHeader>
 </deegreeOAF>

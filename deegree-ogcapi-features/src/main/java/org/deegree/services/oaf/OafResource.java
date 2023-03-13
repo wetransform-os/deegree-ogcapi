@@ -94,6 +94,8 @@ public class OafResource implements Resource {
     private OafDatasetConfiguration oafConfiguration;
 
     private HtmlViewConfiguration htmlViewConfiguration;
+    
+    private boolean addApiVersionToHeader = false;
 
     public OafResource( ResourceMetadata<Resource> metadata, Workspace workspace, DeegreeOAF config ) {
         this.metadata = metadata;
@@ -119,6 +121,7 @@ public class OafResource implements Resource {
                             config.isUseExistingGMLSchema() != null ? config.isUseExistingGMLSchema() : true;
             this.oafConfiguration = new OafDatasetConfiguration( id, featureTypeMetadata, datasetMetadata, supportedCrs,
                                                                  featureStores, useExistingGMLSchema );
+            this.addApiVersionToHeader = config.isAddApiVersionToHeader();
             this.htmlViewConfiguration = getHtmlViewConfig( workspace );
             LOG.debug("Initialising deegree ogcapi with " + oafConfiguration + " and HTML view config " + htmlViewConfiguration);
         } catch ( InvalidConfigurationException e ) {
@@ -130,6 +133,13 @@ public class OafResource implements Resource {
     public void destroy() {
 
     }
+
+    /**
+     * @return configuration from DeegreeOAF indicating whether to add API-Version to response header or not
+     */
+    public boolean isAddApiVersionToHeader() {
+		return addApiVersionToHeader;
+	}
 
     /**
      * @return the parsed {@link OafDatasetConfiguration}, may be <code>null</code> if the configuration could not be parsed
