@@ -30,9 +30,6 @@ LABEL org.opencontainers.image.created=$BUILD_DATE \
 # tomcat port
 EXPOSE 8080
 
-# folder for workspace root
-ENV DEEGREE_WORKSPACE_ROOT=/workspaces
-
 # get dataset list as health check
 HEALTHCHECK \
     --interval=60s \
@@ -41,9 +38,22 @@ HEALTHCHECK \
     --retries=3 \
     CMD curl --fail http://localhost:8080/datasets || exit 1
 
+# copy webapp
+COPY --from=builder /target /webapp
+
+# folder for workspace root
+ENV DEEGREE_WORKSPACE_ROOT=/workspaces
 RUN mkdir $DEEGREE_WORKSPACE_ROOT && \
   (rm -r /usr/local/tomcat/webapps/ROOT || true)
 
-COPY --from=builder /target /usr/local/tomcat/webapps/ROOT
-
 VOLUME $DEEGREE_WORKSPACE_ROOT
+
+# context path to deploy webapp at; defaults to ROOT, can be overridden for container
+ENV DEEGREE_CONTEXT_PATH=ROOT
+
+# Good article on possibilities to control context path:
+# https://octopus.com/blog/defining-tomcat-context-paths
+CMD (rm /usr/local/tomcat/conf/Catalina/localhost/* || true) \
+  && mkdir -p /usr/local/tomcat/conf/Catalina/localhost \
+  && echo '<Context docBase="/webapp"/>' > /usr/local/tomcat/conf/Catalina/localhost/$DEEGREE_CONTEXT_PATH.xml \
+  && /usr/local/tomcat/bin/catalina.sh run
