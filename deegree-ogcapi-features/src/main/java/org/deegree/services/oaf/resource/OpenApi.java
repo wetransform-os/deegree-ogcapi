@@ -105,7 +105,10 @@ public class OpenApi {
         	rendered = Yaml.mapper().writeValueAsString( openApi );
         }
         
-        return Response.status( Response.Status.OK ).entity( rendered ).build();
+        return Response.status( Response.Status.OK )
+        		.header("Access-Control-Allow-Origin", "*")
+        		.entity( rendered )
+        		.build();
 	}
 
 	@GET
