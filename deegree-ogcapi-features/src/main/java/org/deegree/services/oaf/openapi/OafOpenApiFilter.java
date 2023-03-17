@@ -150,6 +150,8 @@ public class OafOpenApiFilter extends AbstractSpecFilter {
             url.append( server.getUrl() );
         if ( server.getUrl() == null || !server.getUrl().endsWith( "/" ) )
             url.append( "/" );
+        //TODO make configurable if version segment should be advertised in base url
+        url.append( ApiVersionPathFilter.VERSION_SEGMENT ).append("/");
         url.append( "datasets/" ).append( datasetId );
         
         //TODO make configurable if version segment should be advertised in API

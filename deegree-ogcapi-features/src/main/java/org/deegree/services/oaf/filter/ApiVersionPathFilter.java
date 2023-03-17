@@ -51,14 +51,26 @@ public class ApiVersionPathFilter implements ContainerRequestFilter {
 
 		// if the relative path is /datasets/{dataset}/{versionSegment}/* skip the
 		// version segment
+		StringBuilder newPath = new StringBuilder(orgUri.getBaseUri().getPath());
 		if (segments.size() >= 3 && VERSION_SEGMENT.equals(segments.get(2).getPath())
 				&& "datasets".equals(segments.get(0).getPath())) {
-			StringBuilder newPath = new StringBuilder(orgUri.getBaseUri().getPath());
 			newPath.append("datasets/");
 			newPath.append(segments.get(1).getPath());
 			for (int i = 3; i < segments.size(); i++) {
 				newPath.append("/");
 				newPath.append(segments.get(i).getPath());
+			}
+			requestContext.setRequestUri(orgUri.getBaseUri(),
+					orgUri.getRequestUriBuilder().replacePath(newPath.toString()).build());
+		} 
+		// if the relative path is baseurl/{versionSegment}/datasets/{dataset}/* skip the
+		// version segment
+		else if(segments.size() >= 1 && VERSION_SEGMENT.equals(segments.get(0).getPath())) {
+			for (int i = 1; i < segments.size(); i++) {
+				newPath.append(segments.get(i).getPath());
+				if(i < segments.size()-1){
+					newPath.append("/");
+				}
 			}
 			requestContext.setRequestUri(orgUri.getBaseUri(),
 					orgUri.getRequestUriBuilder().replacePath(newPath.toString()).build());
