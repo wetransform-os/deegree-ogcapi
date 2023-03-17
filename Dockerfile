@@ -51,9 +51,13 @@ VOLUME $DEEGREE_WORKSPACE_ROOT
 # context path to deploy webapp at; defaults to ROOT, can be overridden for container
 ENV DEEGREE_CONTEXT_PATH=ROOT
 
+# API key to use; if empty will not change API key
+ENV DEEGREE_API_KEY=
+
 # Good article on possibilities to control context path:
 # https://octopus.com/blog/defining-tomcat-context-paths
 CMD (rm /usr/local/tomcat/conf/Catalina/localhost/* || true) \
   && mkdir -p /usr/local/tomcat/conf/Catalina/localhost \
   && echo '<Context docBase="/webapp"/>' > /usr/local/tomcat/conf/Catalina/localhost/$DEEGREE_CONTEXT_PATH.xml \
+  && ([ -z "$DEEGREE_API_KEY" ] || (echo $DEEGREE_API_KEY > $DEEGREE_WORKSPACE_ROOT/config.apikey)) \
   && /usr/local/tomcat/bin/catalina.sh run
