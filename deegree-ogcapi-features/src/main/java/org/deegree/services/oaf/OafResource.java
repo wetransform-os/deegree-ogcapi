@@ -63,6 +63,7 @@ import org.slf4j.Logger;
 
 import javax.xml.namespace.QName;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -284,7 +285,7 @@ public class OafResource implements Resource {
         List<MetadataUrl> metadataUrls = datasetMetadata != null && !datasetMetadata.getMetadataUrls().isEmpty() ?
                                          datasetMetadata.getMetadataUrls() :
                                          Collections.emptyList();
-        String storageCrs = featureStore.getStorageCrs() != null ? featureStore.getStorageCrs().getName() : null;
+        String[] storageCrsCodes = featureStore.getStorageCrs() != null ? featureStore.getStorageCrs().getOrignalCodeStrings() : null;
         return new FeatureTypeMetadata( name )
                         .dateTimeProperty( dateTimeProperty )
                         .extent( extent )
@@ -293,7 +294,7 @@ public class OafResource implements Resource {
                         .metadataUrls( metadataUrls )
                         .filterProperties( filterProperties )
                         .featureType( featureType )
-                        .storageCrs( storageCrs );
+                        .storageCrsCodes( storageCrsCodes != null ? Arrays.asList( storageCrsCodes ) : null );
     }
 
     private List<FilterProperty> parseFilterProperties( FeatureType featureType ) {
