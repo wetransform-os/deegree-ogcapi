@@ -39,6 +39,16 @@
         <enabled>true</enabled>
       </snapshots>
     </repository>
+    <repository>
+      <id>jitpack</id>
+      <url>https://jitpack.io</url>
+      <releases>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
     <!--
     <repository>
       <id>deegree-repo</id>
@@ -503,32 +513,32 @@
     <dependencies>
       <!-- deegree-core -->
       <dependency>
-        <groupId>org.deegree</groupId>
+        <groupId>${deegree-group}</groupId>
         <artifactId>deegree-featurestore-commons</artifactId>
         <version>${deegree-version}</version>
       </dependency>
       <dependency>
-        <groupId>org.deegree</groupId>
+        <groupId>${deegree-group}</groupId>
         <artifactId>deegree-featurestore-sql</artifactId>
         <version>${deegree-version}</version>
       </dependency>
       <dependency>
-        <groupId>org.deegree</groupId>
+        <groupId>${deegree-group}</groupId>
         <artifactId>deegree-featurestore-simplesql</artifactId>
         <version>${deegree-version}</version>
       </dependency>
       <dependency>
-        <groupId>org.deegree</groupId>
+        <groupId>${deegree-group}</groupId>
         <artifactId>deegree-featurestore-memory</artifactId>
         <version>${deegree-version}</version>
       </dependency>
       <dependency>
-        <groupId>org.deegree</groupId>
+        <groupId>${deegree-group}</groupId>
         <artifactId>deegree-featurestore-shape</artifactId>
         <version>${deegree-version}</version>
       </dependency>
       <dependency>
-        <groupId>org.deegree</groupId>
+        <groupId>${deegree-group}</groupId>
         <artifactId>deegree-services-commons</artifactId>
         <version>${deegree-version}</version>
         <scope>compile</scope>
@@ -544,27 +554,27 @@
         </exclusions>
       </dependency>
       <dependency>
-        <groupId>org.deegree</groupId>
+        <groupId>${deegree-group}</groupId>
         <artifactId>deegree-sqldialect-postgis</artifactId>
         <version>${deegree-version}</version>
       </dependency>
       <dependency>
-        <groupId>org.deegree</groupId>
+        <groupId>${deegree-group}</groupId>
         <artifactId>deegree-sqldialect-oracle</artifactId>
         <version>${deegree-version}</version>
       </dependency>
       <dependency>
-        <groupId>org.deegree</groupId>
+        <groupId>${deegree-group}</groupId>
         <artifactId>deegree-connectionprovider-datasource</artifactId>
         <version>${deegree-version}</version>
       </dependency>
       <dependency>
-        <groupId>org.deegree</groupId>
+        <groupId>${deegree-group}</groupId>
         <artifactId>deegree-core-base</artifactId>
         <version>${deegree-version}</version>
       </dependency>
       <dependency>
-        <groupId>org.deegree</groupId>
+        <groupId>${deegree-group}</groupId>
         <artifactId>deegree-core-commons</artifactId>
         <version>${deegree-version}</version>
         <exclusions>
@@ -575,27 +585,27 @@
         </exclusions>
       </dependency>
       <dependency>
-        <groupId>org.deegree</groupId>
+        <groupId>${deegree-group}</groupId>
         <artifactId>deegree-core-geometry</artifactId>
         <version>${deegree-version}</version>
       </dependency>
       <dependency>
-        <groupId>org.deegree</groupId>
+        <groupId>${deegree-group}</groupId>
         <artifactId>deegree-core-workspace</artifactId>
         <version>${deegree-version}</version>
       </dependency>
       <dependency>
-        <groupId>org.deegree</groupId>
+        <groupId>${deegree-group}</groupId>
         <artifactId>deegree-core-cs</artifactId>
         <version>${deegree-version}</version>
       </dependency>
       <dependency>
-        <groupId>org.deegree</groupId>
+        <groupId>${deegree-group}</groupId>
         <artifactId>deegree-services-config</artifactId>
         <version>${deegree-version}</version>
       </dependency>
       <dependency>
-        <groupId>org.deegree</groupId>
+        <groupId>${deegree-group}</groupId>
         <artifactId>deegree-protocol-wfs</artifactId>
         <version>${deegree-version}</version>
       </dependency>
@@ -901,6 +911,17 @@
         <artifactId>gson</artifactId>
         <version>2.8.9</version>
       </dependency>
+      <!-- jitpack issue workaround - it seems jitpack changes org.deegree dependencies to wrong versions -->
+      <dependency>
+        <groupId>org.deegree</groupId>
+        <artifactId>deegree-ogcschemas</artifactId>
+        <version>20210817</version> <!-- jitpack for some reasons produces dependency to 3.5.0-SNAPSHOT version -->
+      </dependency>
+      <dependency>
+        <groupId>org.deegree</groupId>
+        <artifactId>junidecode</artifactId>
+        <version>0.2</version> <!-- jitpack for some reasons produces dependency to 3.5.0-SNAPSHOT version -->
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -913,7 +934,10 @@
     <swagger-version>2.1.13</swagger-version>
     <swagger-ui-version>3.52.5</swagger-ui-version>
     <jackson-version>2.14.1</jackson-version>
-    <deegree-version>3.5.0-SNAPSHOT</deegree-version>
+    <!-- <deegree-group>org.deegree</deegree-group> -->
+    <deegree-group>com.github.wetransform-os.deegree3</deegree-group>
+    <!-- <deegree-version>3.5.0-SNAPSHOT</deegree-version> -->
+    <deegree-version>ogcapi-7240-SNAPSHOT</deegree-version>
     <slf4j.version>1.7.36</slf4j.version>
     <log4j.version>2.17.2</log4j.version>
   </properties>
