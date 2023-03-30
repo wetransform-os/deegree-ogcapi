@@ -34,17 +34,17 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.deegree</groupId>
+      <groupId>${deegree-group}</groupId>
       <artifactId>deegree-sqldialect-oracle</artifactId>
       <scope>runtime</scope>
     </dependency>
     <dependency>
-      <groupId>org.deegree</groupId>
+      <groupId>${deegree-group}</groupId>
       <artifactId>deegree-featurestore-simplesql</artifactId>
       <scope>runtime</scope>
       <exclusions>
         <exclusion>
-          <groupId>org.deegree</groupId>
+          <groupId>${deegree-group}</groupId>
           <artifactId>deegree-sqldialect-postgis</artifactId>
         </exclusion>
       </exclusions>
