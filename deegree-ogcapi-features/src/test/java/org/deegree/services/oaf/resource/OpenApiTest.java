@@ -23,6 +23,7 @@ package org.deegree.services.oaf.resource;
 
 import org.deegree.commons.utils.TunableParameter;
 import org.deegree.services.oaf.OgcApiFeaturesMediaType;
+import org.deegree.services.oaf.filter.ApiVersionPathFilter;
 import org.deegree.services.oaf.filter.OpenApiAliasFilter;
 import org.deegree.services.oaf.openapi.OpenApiCreator;
 import org.deegree.services.oaf.workspace.DeegreeWorkspaceInitializer;
@@ -47,8 +48,10 @@ import java.io.IOException;
 import static com.jayway.jsonpath.matchers.JsonPathMatchers.hasJsonPath;
 import static com.jayway.jsonpath.matchers.JsonPathMatchers.isJson;
 import static org.deegree.services.oaf.TestData.mockWorkspaceInitializer;
+import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -84,6 +87,7 @@ public class OpenApiTest extends JerseyTest {
         ResourceConfig resourceConfig = new ResourceConfig();
         resourceConfig.packages("org.deegree.services.oaf.resource");
         resourceConfig.register(OpenApiAliasFilter.class);
+        resourceConfig.register(ApiVersionPathFilter.class);
         resourceConfig.register(new AbstractBinder() {
             @Override
             protected void configure() {
@@ -156,6 +160,18 @@ public class OpenApiTest extends JerseyTest {
         assertThat(json, hasJsonPath("$.paths./collections/strassenbaumkataster/items"));
         assertThat(json, hasJsonPath("$.paths./collections/strassenbaumkataster/items/{featureId}"));
         assertThat(json, hasJsonPath("$.paths./api"));
+    }
+    
+    /**
+	 * Test that the version segment is not contained in server URL.
+	 */
+    @Test
+    public void test_OpenApi_serverUrl() {
+        String json = target("/datasets/oaf/api").request(OgcApiFeaturesMediaType.APPLICATION_OPENAPI).get(
+                String.class);
+
+        assertThat(json, isJson());
+        assertThat(json, hasJsonPath("$.servers[0].url", not(endsWith("/v1"))));
     }
 
 }
