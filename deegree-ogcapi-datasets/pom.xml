@@ -22,11 +22,11 @@
 
   <dependencies>
     <dependency>
-      <groupId>${deegree-group}</groupId>
+      <groupId>org.deegree</groupId>
       <artifactId>deegree-core-commons</artifactId>
     </dependency>
     <dependency>
-      <groupId>${deegree-group}</groupId>
+      <groupId>org.deegree</groupId>
       <artifactId>deegree-core-workspace</artifactId>
     </dependency>
     <dependency>

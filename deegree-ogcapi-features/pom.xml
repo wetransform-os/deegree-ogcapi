@@ -49,31 +49,31 @@
     </dependency>
     <!-- deegree-core -->
     <dependency>
-      <groupId>${deegree-group}</groupId>
+      <groupId>org.deegree</groupId>
       <artifactId>deegree-core-geometry</artifactId>
     </dependency>
     <dependency>
-      <groupId>${deegree-group}</groupId>
+      <groupId>org.deegree</groupId>
       <artifactId>deegree-core-base</artifactId>
     </dependency>
     <dependency>
-      <groupId>${deegree-group}</groupId>
+      <groupId>org.deegree</groupId>
       <artifactId>deegree-featurestore-commons</artifactId>
     </dependency>
     <dependency>
-      <groupId>${deegree-group}</groupId>
+      <groupId>org.deegree</groupId>
       <artifactId>deegree-core-cs</artifactId>
     </dependency>
     <dependency>
-      <groupId>${deegree-group}</groupId>
+      <groupId>org.deegree</groupId>
       <artifactId>deegree-core-workspace</artifactId>
     </dependency>
     <dependency>
-      <groupId>${deegree-group}</groupId>
+      <groupId>org.deegree</groupId>
       <artifactId>deegree-core-commons</artifactId>
     </dependency>
     <dependency>
-      <groupId>${deegree-group}</groupId>
+      <groupId>org.deegree</groupId>
       <artifactId>deegree-services-commons</artifactId>
       <exclusions>
         <exclusion>
@@ -87,7 +87,7 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>${deegree-group}</groupId>
+      <groupId>org.deegree</groupId>
       <artifactId>deegree-protocol-wfs</artifactId>
     </dependency>
     <dependency>
