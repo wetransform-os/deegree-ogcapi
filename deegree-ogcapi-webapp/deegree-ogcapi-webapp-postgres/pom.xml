@@ -34,7 +34,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>${deegree-group}</groupId>
+      <groupId>org.deegree</groupId>
       <artifactId>deegree-sqldialect-postgis</artifactId>
       <scope>runtime</scope>
     </dependency>
