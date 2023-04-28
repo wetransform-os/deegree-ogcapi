@@ -426,3 +426,16 @@ The REST-API is enabled by default. To protect this interface from unauthorized 
 
 A detailed documentation of the REST-API interface and how access is configured is described in section "deegree REST interface"
 of the https://download.deegree.org/documentation/3.4.17/html/#anchor-configuration-restapi[deegree webservices handbook].
+
+=== Enable API version segment in path
+
+Set the system property ```deegree.oaf.openapi.version_path_segment``` to _true_ to enable a path segment representing the major API version. The segment is inserted in dataset related paths after the dataset ID.
+
+```
+EXAMPLE
+/datasets/streets/v1/collections
+```
+
+The OpenAPI definition for each dataset then includes the version segment in the server URL.
+
+The version segment is added after the dataset ID because deegree creates a separate API with its own API definition for each dataset.
